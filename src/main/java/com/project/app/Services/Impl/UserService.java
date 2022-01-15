@@ -56,6 +56,13 @@ public class UserService implements IUserService {
 		});
 		return authorities;
 	}
+	
+	
+	@Override
+	public Long getCountUser() {
+		return userRepository.count();
+	}
+	
 
 	@Override
 	public Page<UserDTO> getUsers(int page, int size) {
@@ -127,5 +134,7 @@ public class UserService implements IUserService {
 			throw new NotFoundException(AppErrors.USERNAME_NOT_FOUND +": "+e.getMessage());
 		}
 	}
+
+
 
 }

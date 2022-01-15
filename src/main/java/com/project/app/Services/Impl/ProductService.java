@@ -122,6 +122,12 @@ public class ProductService implements IProductService {
 		
 	}
 
+	@Override
+	public Long getCountProducts() {
+		// TODO Auto-generated method stub
+		return productRepository.count();
+	}
+
 
 
 }

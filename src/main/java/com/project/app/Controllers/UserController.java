@@ -25,6 +25,10 @@ public class UserController {
 	@Autowired
 	private IUserService userService;
 
+	@GetMapping("/count")
+	public ResponseEntity<Long> getCountUser(){
+		return new ResponseEntity<>(userService.getCountUser(),HttpStatus.OK);
+	}
 
 	@GetMapping
 	public Page<UserDTO> getUsers(@PathParam(value = "page") int page, @PathParam(value = "size") int size){

@@ -25,6 +25,12 @@ public class CategoryController {
 	@Autowired
 	private ICategoryService categoryService;
 
+	
+	@GetMapping("/count")
+	public ResponseEntity<Long> getCountCaterogies(){
+		return new ResponseEntity<>(categoryService.getCountCaterogies(),HttpStatus.OK);
+	}
+	
 	@GetMapping
 	public Page<CategoryDTO> getCategories(@PathParam(value = "page") int page, @PathParam(value = "size") int size){
 		return categoryService.getCategories(page, size);

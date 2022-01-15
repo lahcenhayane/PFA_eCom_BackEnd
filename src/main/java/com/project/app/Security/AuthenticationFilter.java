@@ -54,7 +54,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 
 		String TOKEN = Jwts.builder()
 							.setSubject(user.getEmail())
-							.claim("user_id", user.getId())
 							.setExpiration(new Date(System.currentTimeMillis() + ConstSecurity.DTAE_EXPERATION_TOKEN))
 							.signWith(SignatureAlgorithm.HS512, ConstSecurity.SECRET_TOKEN)
 							.compact();
@@ -62,8 +61,10 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.addHeader(ConstSecurity.HEADER_TOKEN, ConstSecurity.PREFIX_TOKEN+""+TOKEN);
-		String _Token = ConstSecurity.PREFIX_TOKEN+""+TOKEN;
-		response.getWriter().write("{\"" +ConstSecurity.HEADER_TOKEN + "\":\""+ _Token +"\" }");
+//		String _Token = ConstSecurity.PREFIX_TOKEN+""+TOKEN;
+		response.getWriter().write("{\"" +ConstSecurity.HEADER_TOKEN + "\":\""+ TOKEN +"\" ,"
+				+ "\"" +"username"+ "\":\""+ user.getEmail() +"\","
+				+ "\"" +"user"+ "\":\""+ user.getUsername() +"\"}");
 	}
 
 }

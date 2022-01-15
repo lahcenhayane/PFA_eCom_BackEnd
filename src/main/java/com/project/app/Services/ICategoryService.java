@@ -18,4 +18,6 @@ public interface ICategoryService {
 
 	CategoryDTO editCategory(String category, CategoryDTO categoryDTO);
 
+	Long getCountCaterogies();
+
 }

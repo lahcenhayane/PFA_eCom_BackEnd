@@ -10,4 +10,6 @@ public interface IOrderService {
 	Page<OrderEntity> getOrders(int page, int size);
 
     OrderDTO createOrder(OrderDTO orderDTO);
+
+	Long getCountOrders();
 }

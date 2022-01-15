@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,7 +24,7 @@ import com.project.app.Repositories.RoleRepository;
 import com.project.app.Repositories.UserRepository;
 
 @SpringBootApplication
-public class EComBackEndApplication implements CommandLineRunner {
+public class EComBackEndApplication extends SpringBootServletInitializer implements CommandLineRunner {
 
 	@Autowired
 	private UserRepository userRepository;
@@ -34,6 +36,12 @@ public class EComBackEndApplication implements CommandLineRunner {
 	private OrderRepository orderRepository;
 
 	
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		// TODO Auto-generated method stub
+		return builder.sources(EComBackEndApplication.class);
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(EComBackEndApplication.class, args);
 	}

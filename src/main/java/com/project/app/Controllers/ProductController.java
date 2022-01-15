@@ -25,6 +25,11 @@ public class ProductController {
 	@Autowired
 	private IProductService productService;
 
+	@GetMapping("/count")
+	public ResponseEntity<Long> getCountProducts(){
+		return new ResponseEntity<>(productService.getCountProducts(),HttpStatus.OK);
+	}
+	
 	@GetMapping
 	public Page<ProductDTO> getProducts(@PathParam(value = "page") int page, @PathParam(value = "size") int size) {
 		return productService.getProducts(page, size);

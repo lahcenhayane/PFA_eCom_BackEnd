@@ -97,6 +97,12 @@ public class CategoryService implements ICategoryService {
 		}
 	}
 
+	@Override
+	public Long getCountCaterogies() {
+		// TODO Auto-generated method stub
+		return categoryRepository.count();
+	}
+
 
 
 

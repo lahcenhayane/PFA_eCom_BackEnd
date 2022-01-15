@@ -12,7 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.project.app.Auth;
+
 import com.project.app.DTO.AddressDTO;
 import com.project.app.DTO.LineOrderDTO;
 import com.project.app.DTO.OrderDTO;
@@ -96,6 +96,11 @@ public class OrderService implements IOrderService {
 		
 		// TODO: Return OrderDTO.
 		return  orderMapper.CONVERT_FROM_ENTITY_TO_DTO_WITH_ADDRESS_AND_USER_AND_LINEORDER(order);
+	}
+	@Override
+	public Long getCountOrders() {
+		// TODO Auto-generated method stub
+		return orderRepository.count();
 	}
 
 }

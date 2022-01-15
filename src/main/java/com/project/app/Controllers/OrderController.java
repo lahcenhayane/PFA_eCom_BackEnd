@@ -23,6 +23,12 @@ public class OrderController {
 	@Autowired
 	private IOrderService orderService;
 
+	@GetMapping("/count")
+	public ResponseEntity<Long> getCountOrders(){
+		return new ResponseEntity<>(orderService.getCountOrders(),HttpStatus.OK);
+	}
+	
+	
 	@GetMapping
 	public Page<OrderEntity> getOrders(@PathParam(value = "page") int page, @PathParam(value = "size") int size){
 		return orderService.getOrders(page, size);

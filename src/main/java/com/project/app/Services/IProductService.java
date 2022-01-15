@@ -19,4 +19,6 @@ public interface IProductService {
 	
 	void editQuantity(String producturl, int qte);
 
+	Long getCountProducts();
+
 }
