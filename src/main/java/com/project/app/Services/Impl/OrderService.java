@@ -2,6 +2,8 @@ package com.project.app.Services.Impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -20,6 +22,8 @@ import com.project.app.Entities.AddressEntity;
 import com.project.app.Entities.LineOrderEntity;
 import com.project.app.Entities.OrderEntity;
 import com.project.app.Entities.UserEntity;
+import com.project.app.Exceptions.NotFoundException;
+import com.project.app.Exceptions.App.AppErrors;
 import com.project.app.Mapper.AddressMapper;
 import com.project.app.Mapper.LineOrderMapper;
 import com.project.app.Mapper.OrderMapper;
@@ -101,6 +105,17 @@ public class OrderService implements IOrderService {
 	public Long getCountOrders() {
 		// TODO Auto-generated method stub
 		return orderRepository.count();
+	}
+	@Override
+	public Page<OrderDTO> getOrdersByUserID(Long id, int page, int size) {
+		try {
+			userRepository.findById(id).get();			
+		}catch(NoSuchElementException e) {
+			throw new NotFoundException(AppErrors.USERNAME_NOT_FOUND);
+		}
+		Page<OrderEntity> orders = orderRepository.getOrderByUserID(id, PageRequest.of(page, size));
+		
+		return orders.map(orderMapper::CONVERT_FROM_ENTITY_TO_DTO_WITH_ADDRESS);
 	}
 
 }

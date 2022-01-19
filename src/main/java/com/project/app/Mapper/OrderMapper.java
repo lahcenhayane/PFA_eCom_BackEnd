@@ -41,6 +41,11 @@ public class OrderMapper implements Mapper<OrderEntity, OrderDTO>{
 		orderDTO.setUser(userMapper.CONVERT_FROM_ENTITY_TO_DTO(e.getUser()));
 		return orderDTO;
 	}
+	public OrderDTO CONVERT_FROM_ENTITY_TO_DTO_WITH_ADDRESS_AND_LINEORDER(OrderEntity e) {
+		OrderDTO orderDTO = CONVERT_FROM_ENTITY_TO_DTO_WITH_ADDRESS(e);
+		orderDTO.setLinesOrders(e.getLinesOrders().stream().map(lineOrderMapper::CONVERT_FROM_ENTITY_TO_DTO_WITH_PRODUCT).collect(Collectors.toList()));
+		return orderDTO;
+	}
 	public OrderDTO CONVERT_FROM_ENTITY_TO_DTO_WITH_ADDRESS_AND_USER_AND_LINEORDER(OrderEntity e) {
 		OrderDTO orderDTO = CONVERT_FROM_ENTITY_TO_DTO_WITH_ADDRESS_AND_USER(e);
 		orderDTO.setLinesOrders(e.getLinesOrders().stream().map(lineOrderMapper::CONVERT_FROM_ENTITY_TO_DTO_WITH_PRODUCT).collect(Collectors.toList()));

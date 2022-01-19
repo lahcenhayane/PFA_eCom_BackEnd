@@ -3,14 +3,17 @@ package com.project.app.Mapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.project.app.DTO.OrderDTO;
 import com.project.app.DTO.RoleDTO;
 import com.project.app.DTO.UserDTO;
+import com.project.app.Entities.OrderEntity;
 import com.project.app.Entities.RoleEntity;
 import com.project.app.Entities.UserEntity;
 
@@ -22,7 +25,9 @@ public class UserMapper implements Mapper<UserEntity, UserDTO>{
 
 	@Autowired
 	private RoleMapper roleMapper;
-
+	@Autowired
+	private LineOrderMapper lineOrderMapper;
+	
 	private List<UserDTO> list_users_dto = new ArrayList<>();
 
 
@@ -61,7 +66,20 @@ public class UserMapper implements Mapper<UserEntity, UserDTO>{
 		userDto.setRoles(roleDto);
 		return userDto;
 	}
-
+	public UserDTO CONVERT_FROM_ENTITY_TO_DTO_WITH_ROLES_AND_ORDERS(UserEntity user){
+		UserDTO users =  CONVERT_FROM_ENTITY_TO_DTO_WITH_ROLES(user);
+		
+//		List<OrderDTO> orders = new ArrayList<>();
+//		users.getOrders().stream().forEach(row->{
+//			OrderDTO orderDTO = new OrderDTO();
+//			orderDTO.setId(row.getId());
+//			orderDTO.setTotal(row.getTotal());
+//			orderDTO.setLinesOrders(row.getLinesOrders().stream().map(lineOrderMapper::CONVERT_FROM_ENTITY_TO_DTO_WITH_PRODUCT).collect(Collectors.toList()));
+//			orders.add(orderDTO);
+//		});
+		
+		return users;
+	}
 
 
 	//---------------FROM DTO TO ENTITY

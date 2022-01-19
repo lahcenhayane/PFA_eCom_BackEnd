@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,11 @@ public class OrderController {
 
 	@Autowired
 	private IOrderService orderService;
+	
+	@GetMapping("/{id}/details")
+	public Page<OrderDTO> getOrdersByUserID(@PathVariable Long id, @PathParam(value = "page") int page, @PathParam(value = "size") int size){
+		return orderService.getOrdersByUserID(id, page, size);
+	}
 
 	@GetMapping("/count")
 	public ResponseEntity<Long> getCountOrders(){

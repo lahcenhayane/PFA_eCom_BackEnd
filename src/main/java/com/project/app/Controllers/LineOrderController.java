@@ -16,7 +16,7 @@ import com.project.app.Mapper.LineOrderMapper;
 import com.project.app.Services.ILineOrderService;
 
 @RestController
-@RequestMapping(name = "/lineorders")
+//@RequestMapping(name = "/lineorders")
 public class LineOrderController {
 
 //	@Autowired

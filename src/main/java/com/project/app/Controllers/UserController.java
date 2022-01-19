@@ -35,6 +35,12 @@ public class UserController {
 		return userService.getUsers(page, size);
 	}
 
+	@GetMapping("/{id}/details")
+	public Page<UserDTO> getUserWithOrders(@PathVariable Long id, @PathParam(value = "page") int page, @PathParam(value = "size") int size){
+		return userService.getUserWithOrders(page, size);
+	}
+
+	
 	@PostMapping
 	public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO dto){
 		return new ResponseEntity<>(userService.createUser(dto), HttpStatus.CREATED);

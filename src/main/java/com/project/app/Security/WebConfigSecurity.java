@@ -42,6 +42,8 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter{
 			.and()
 			.authorizeRequests()
 				.antMatchers(HttpMethod.POST, "/users").permitAll()
+				.antMatchers(HttpMethod.GET, "/products").permitAll()
+				.antMatchers(HttpMethod.GET, "/categories").permitAll()
 //				.antMatchers("/users").hasRole(Roles.ADMIN.name())
 				.anyRequest().authenticated().and()
 			.addFilter(new AuthenticationFilter(authenticationManager(), userRepository))

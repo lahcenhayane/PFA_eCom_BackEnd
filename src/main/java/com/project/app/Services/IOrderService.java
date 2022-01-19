@@ -12,4 +12,6 @@ public interface IOrderService {
     OrderDTO createOrder(OrderDTO orderDTO);
 
 	Long getCountOrders();
+
+	Page<OrderDTO> getOrdersByUserID(Long id, int page, int size);
 }

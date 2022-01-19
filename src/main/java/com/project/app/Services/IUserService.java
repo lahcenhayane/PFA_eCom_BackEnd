@@ -14,4 +14,5 @@ public interface IUserService extends UserDetailsService {
 	public UserDTO editUser(Long id, UserDTO userDTO);
 	public void deleteUser(Long id);
 	public Long getCountUser();
+	public Page<UserDTO> getUserWithOrders(int page, int size);
 }
